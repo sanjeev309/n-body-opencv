@@ -9,7 +9,6 @@
 
 #include <opencv2/highgui.hpp>
 #include <opencv2/core.hpp>
-#include <opencv2/features2d.hpp>
 #include <opencv2/imgproc.hpp>
 
 #define MAX_X 600
@@ -51,7 +50,6 @@ for (int i=0;i<numBodies;i++){
     p[i].vx+=dt*fx;
     p[i].vy+=dt*fy;
 
-//    cout<<"("<<p[i].vx<<","<<p[i].vy<<")"<<endl;
 }
 }
 
@@ -77,22 +75,13 @@ for(int iter=0;iter<=nIter;iter++){
     for(int i=0;i<nBodies;i++){
             p[i].x+=(int)p[i].vx*dt;
             p[i].y+=(int)p[i].vy*dt;
-//            cout<<"("<<p[i].x<<","<<p[i].y<<")"<<endl;
             circle(disp,Point(p[i].x,p[i].y),0,Scalar(255,255,255),1);
-
-//            imshow("Nbody",disp);
-//            if( waitKey(30)==0)
-//                break;
-
     }
+
     putText(disp,"Iterations: "+to_string(iter),Point(MAX_X - 200,30),FONT_HERSHEY_COMPLEX,0.5,Scalar(255,255,255),1,LINE_8,false);
     imshow("Nbody",disp);
     if( waitKey(30)==0)
         break;
 
 }
-
-
-//cout<<"Size of body:"<<sizeof(Body);
-
 }
