@@ -11,17 +11,18 @@
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 
-#define MAX_X 600
-#define MAX_Y 600
+//Edit here for window size
+#define MAX_X 600   //X-axis
+#define MAX_Y 600   //Y-axis
 
-#define SOFTENING 3
+#define SOFTENING 3  //Softening Parameter
 
 using namespace std;
 using namespace cv;
 
-typedef struct{int x,y ; float vx,vy;} Body;
+typedef struct{int x,y ; float vx,vy;} Body;  //Fundamental Structure of Single Body
 
-void randomlyAllocate(Body *data,int n)
+void randomlyAllocate(Body *data,int n)     //Randomly Allocate position to all particles
 {
 for (int i=0;i<n;i++){
     data[i].x = std::rand() % ( MAX_X + 1 );
@@ -30,7 +31,7 @@ for (int i=0;i<n;i++){
 
 }
 
-void calcForce(Body *p,float dt, int numBodies)
+void calcForce(Body *p,float dt, int numBodies)   //Calculate Force on all particles for given particles
 {
 #pragma omp parallel for schedule(dynamic)
 for (int i=0;i<numBodies;i++){
@@ -57,19 +58,19 @@ int main()
 {
 Mat disp;
 disp= Mat::zeros( MAX_Y, MAX_X, CV_8UC3 );
-int nBodies=5000;
-int dt=1;
-int nIter=1000;
+int nBodies=5000;    //Number of Bodies
+int dt=1;            //Time step a.k.a. Speed of simulation
+int nIter=1000;      // Number of iterations
 
-int bytes = nBodies*sizeof(Body);
+int bytes = nBodies*sizeof(Body);    //Allocate memory to All the bodies
 float *buf = (float*)malloc(bytes);
 Body *p = (Body*)buf;
 
-randomlyAllocate(p,nBodies);
+randomlyAllocate(p,nBodies);      //Randomise locations of nBodies Particles
 
-for(int iter=0;iter<=nIter;iter++){
+for(int iter=0;iter<=nIter;iter++){                  
 
-    disp= Mat::zeros( MAX_Y, MAX_X, CV_8UC3 );
+    disp= Mat::zeros( MAX_Y, MAX_X, CV_8UC3 );         
     calcForce(p,dt,nBodies);
 
     for(int i=0;i<nBodies;i++){
