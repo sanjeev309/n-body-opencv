@@ -1,4 +1,42 @@
-# visualise-nbody-opencv
-A Visualisation of N-body Gravitational body system in OpenCV using C++ with OpenMP parallelization
 
-nbody.cpp contains code to implement N-Body simulation on varying number of particles and visualise it using OpenCV GUI. To improve computational speed, OpenMP parallelization has been used to distribute calculation of Force,Velocity and finally updated Co-ordinates for the particle system on multiple cores of CPU.
+# N-body simulation in OpenCV
+
+A visualisation of N-body physics in C++ using OpenCV library to visualise particles and their interactions.
+
+## Getting Started
+
+- Clone the repo into your folder
+
+    `git clone https://github.com/sanjeev309/n-body-opencv.git `
+
+- Make changes if any to main.cpp
+- Execute make command to compile into an executable
+
+    `make compile`
+
+- Run the executable
+
+    `./n_body_opencv`
+
+### Prerequisites
+
+All OpenCV dependencies are already included in the repo. You do need g++ which generally comes by default
+
+
+## Built With
+
+* [OpenCV](https://github.com/opencv/opencv/releases/tag/3.2.0) - The Computer Vision Library
+
+
+## Authors
+
+* **Sanjeev Tripathi** - [LinkedIn](https://www.linkedin.com/in/sanjeev309/)
+
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/sanjeev309/n-body-opencv/blob/master/LICENSE) file for details
+
+## Acknowledgments
+
+* Adaptation and modification of [mharris's](https://github.com/harrism) work [mini-nbody](https://github.com/harrism/mini-nbody) with all credit and respect.
