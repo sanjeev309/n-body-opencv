@@ -18,6 +18,10 @@ A visualisation of N-body physics in C++ using OpenCV library to visualise parti
 
     `./n_body_opencv`
 
+- Clean for a rebuild
+
+    `make clean`
+
 ### Prerequisites
 
 All OpenCV dependencies are already included in the repo. You do need g++ which generally comes by default
