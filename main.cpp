@@ -26,8 +26,8 @@ typedef struct{float x,y ; float vx,vy;} Body;
 void randomlyAllocate(Body *data,int n)
 {
 for (int i=0;i<n;i++){
-    data[i].x =( std::rand() % ( MAX_X/4 + 1 )) + ( MAX_X/4 + 1 );
-    data[i].y =( std::rand() % ( MAX_Y/4 + 1 )) + ( MAX_Y/4 + 1 ) ;
+    data[i].x =( std::rand() % ( MAX_X + 1 ));
+    data[i].y =( std::rand() % ( MAX_Y + 1 ));
     }
 
 }
