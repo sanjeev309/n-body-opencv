@@ -17,19 +17,20 @@
 #define MAX_Y 480
 
 #define SOFTENING 1
+#define NUM_PARTICLES 1500
 
 using namespace std;
 using namespace cv;
 
-typedef struct{float x,y ; float vx,vy;} Body;
+typedef struct{float x,y,mass ; float vx,vy;} Body;
 
 void randomlyAllocate(Body *data,int n)
 {
 for (int i=0;i<n;i++){
     data[i].x =( std::rand() % ( MAX_X + 1 ));
     data[i].y =( std::rand() % ( MAX_Y + 1 ));
+    data[i].mass = ( std::rand() % (3)) + 1;
     }
-
 }
 
 void calcForce(Body *p,float dt, int numBodies)
@@ -45,8 +46,8 @@ for (int i=0;i<numBodies;i++){
         float sqdist=dx*dx + dy*dy +SOFTENING;
         float InvDist = 1.0f/(sqrtf(sqdist));
         float InvDist3= InvDist*InvDist*InvDist;
-        fx+= dx*InvDist3;
-        fy+= dy*InvDist3;
+        fx+= (dx * InvDist3 * p[j].mass) / p[i].mass ;
+        fy+= (dy * InvDist3 * p[j].mass) / p[i].mass ;
     }
 
     p[i].vx+=dt*fx;
@@ -59,9 +60,8 @@ int main()
     {
 
     Mat disp(Mat(MAX_Y,MAX_X, CV_8UC3));
-
     disp=Scalar(128,128,128);
-    int nBodies=2000;
+    int nBodies= NUM_PARTICLES;
     int dt=1;
     int nIter=100000;
 
@@ -81,8 +81,7 @@ int main()
         for(int i=0;i<nBodies;i++){
                 p[i].x+=(int)p[i].vx*dt;
                 p[i].y+=(int)p[i].vy*dt;
-
-                circle(disp,Point(int(p[i].x),int(p[i].y)),0,Scalar(255,255,255),1);
+                circle(disp,Point(int(p[i].x),int(p[i].y)),p[i].mass,Scalar(255,255,255),-1);
 
         }
         putText(disp,"Epoch: "+to_string(iter),Point(MAX_X - 200,30),FONT_HERSHEY_COMPLEX,0.5,Scalar(255,255,255),1,LINE_8,false);
