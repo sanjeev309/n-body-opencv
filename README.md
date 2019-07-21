@@ -24,7 +24,12 @@ A visualisation of N-body physics in C++ using OpenCV library to visualise parti
 
 ### Prerequisites
 
-All OpenCV dependencies are already included in the repo. You do need g++ which generally comes by default
+OpenCV 3.2 installation and header files.
+
+
+### Demonstration
+
+![N_body Simulation](assets/n_body_sim.gif)
 
 
 ## Built With
